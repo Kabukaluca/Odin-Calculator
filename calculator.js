@@ -1,3 +1,16 @@
+// Variables
+var firstNum = "";
+var secondNum = "";
+var operator = "";
+
+function operate(firstNum, operator, secondNum) {
+    if (operator === "+") {return add(firstNum, secondNum)};
+    if (operator === "-") {return subtract(firstNum, secondNum)};
+    if (operator === "/") {return divide(firstNum, secondNum)};
+    if (operator === "*") {return  multiply(firstNum, secondNum)};
+};
+
+// Math fucntions
 function add(a, b) {
     return (a + b);
 };
@@ -6,15 +19,10 @@ function subtract(a, b) {
     return (a - b);
 };
 
-function muliply(a, b) {
+function multiply(a, b) {
     return (a * b);
 };
 
 function divide(a, b) {
     return (a / b);
 };
-
-console.log(add(1,2));
-console.log(subtract(2,1));
-console.log(muliply(2,2));
-console.log(divide(6,2));
