@@ -31,3 +31,11 @@ That being said, let's go!
             - All-Clear-Buttom (AC)
             - Comma-Button (,)
             - Delete-Button (Del)
+
+    Step 5:
+        Create functions to display numbers in "display"
+            - add eventlistener to buttons
+            - if button is clicked => add btn value to display
+            
+        Create a var to store the display data for futher steps
+            - var display-Data ?
