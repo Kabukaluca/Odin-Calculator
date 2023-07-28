@@ -8,52 +8,62 @@ const operatorBtns = document.querySelectorAll(".operator-btn");
 const equalsBtn = document.querySelector(".equals-btn");
 const commaBtn = document.querySelector(".comma-btn")
 
-
-//let calculations = [];
 let hasOperatorBtn = false;
+let hasOperatorBtnCount = 0;
+let hasCommaBtn = false;
 
 // DOM Methods
 numBtns.forEach(numBtn => {
 numBtn.addEventListener("click", () => {
     const buttonValue = numBtn.textContent;
     currentDisplay.textContent += buttonValue;
-    //calculations.push(buttonValue);
     hasOperatorBtn = false;
     })
 });
 
 delBtn.addEventListener("click", () => {
     currentDisplay.textContent = currentDisplay.textContent.slice(0, -1)
-    //calculations.pop();
     hasOperatorBtn = false;
 });
 
 acBtn.addEventListener("click", () => {
     currentDisplay.textContent = "";
     previousDisplay.textContent = "";
-    //calculations = [];
     hasOperatorBtn = false;
 });
 
 commaBtn.addEventListener("click", () => {
     const commaValue = commaBtn.textContent;
+    if(!hasCommaBtn) {
     currentDisplay.textContent += commaValue;
-    //calculations.push(commaValue);
     hasOperatorBtn = false;
+    hasCommaBtn = true;
+}
 });
 
 operatorBtns.forEach(operatorBtn => {
 operatorBtn.addEventListener("click", () => {
     const opBtnVal = operatorBtn.textContent;
+    if (!hasOperatorBtn && hasOperatorBtnCount > 0) {
+        updateSecondNum();
+        operate();
+        previousDisplay.textContent = currentDisplay.textContent + " " + opBtnVal;
+        updateFirstNum();
+        updateOperator(opBtnVal);
+        currentDisplay.textContent = "";
+        hasCommaBtn = false;
+        hasOperatorBtn = true;
+    }
     if(!hasOperatorBtn) {
     currentDisplay.textContent += " " + opBtnVal;
     previousDisplay.textContent = currentDisplay.textContent;
     updateFirstNum();
     updateOperator(opBtnVal);
     currentDisplay.textContent = "";
-    //calculations.push(opBtnVal);
+    hasOperatorBtnCount = 1;
     hasOperatorBtn = true;
-    }
+    hasCommaBtn = false;
+    } 
     })
 });
 
@@ -61,9 +71,8 @@ equalsBtn.addEventListener("click", () => {
     updateSecondNum();
     operate();
     hasOperatorBtn = false;
-    //calculations = [];
+    hasOperatorBtnCount = 0;
 });
-
 
 // Variables
 var firstNum = "";
@@ -71,13 +80,14 @@ var secondNum = "";
 var operator = "";
 var result = "";
 
+// Functions
 function operate() {
     if (operator === "+")  {
         previousDisplay.textContent += " " + currentDisplay.textContent;
         result = add(+firstNum, +secondNum);
         currentDisplay.textContent = result;
     };
-    if (operator === "-") {
+    if (operator === "−") {
         previousDisplay.textContent += " " + currentDisplay.textContent;
         result = subtract(+firstNum, +secondNum);
         currentDisplay.textContent = result;
@@ -87,7 +97,7 @@ function operate() {
         result = divide(+firstNum, +secondNum);
         currentDisplay.textContent = result;
     };
-    if (operator === "*") {
+    if (operator === "×") {
         previousDisplay.textContent += " " + currentDisplay.textContent;
         result = multiply(+firstNum, +secondNum);
         currentDisplay.textContent = result;
@@ -95,7 +105,12 @@ function operate() {
 };
 
 function updateFirstNum() {
-    firstNum = currentDisplay.textContent = currentDisplay.textContent.slice(0, -1)
+    if (hasOperatorBtnCount < 1) {
+    firstNum = currentDisplay.textContent = currentDisplay.textContent.slice(0, -1);
+    }
+    if (hasOperatorBtnCount === 1) {
+    firstNum = currentDisplay.textContent = currentDisplay.textContent;
+    }
 };
 
 function updateSecondNum() {
@@ -110,7 +125,7 @@ function updateResult(value) {
     result = value;
 }
 
-// Math fucntions
+// Bais-math functions
 function add(a, b) {
     return (a + b);
 };
