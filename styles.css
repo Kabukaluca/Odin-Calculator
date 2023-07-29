@@ -1,39 +1,102 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family:'Times New Roman', Times, serif;
+    font-weight: normal;
+}
+
+html {
+    background:
+        linear-gradient(
+        rgba(0, 0, 0, 0.7), 
+        rgba(0, 0, 0, 0.7)
+       ),          
+       url("images/galaxy_calc.jpg");
+    background-size: cover;
+}
+
+
 .body {
     padding: 0;
     margin: 0;
     text-align: center;
-    
-}
-button {
-    box-sizing: border-box;
-    font-size: 2rem;
 }
 
 #calculator-container {
-    height: 700px;
-    width: 400px;
-    border: 2px solid black;
+    min-height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    grid-template-columns: minmax(280, 400) repeat(4, 100px);
+    grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+    gap: 5px;
 }
 
+
 .display-container {
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    grid-column: 1 / -1;
+    background-color: transparent;
     display: flex;
-    align-items: end;
-    justify-content: center;
+    justify-content: space-around;
     flex-direction: column;
-    width: 100%;
-    height: 150px;
-    background-color: antiquewhite;
-    font-size: 2rem;
+    align-items: flex-end;
+    padding: 25px;
+    min-height: 150px;
+    max-width: 415px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.display-previous {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.display-current {
+    font-size: 2.5rem;
+    color: white;
 }
 
 .button-grid {
     display: grid;
-    justify-content: center;
-    align-content: center;
     grid-template-columns: repeat(4, 100px);
-    grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+    grid-template-rows: minmax(100px, auto) repeat(5, 100px);
+    gap: 5px;
 }
 
-.ac-btn, .equals-btn {
+button {
+    cursor: pointer;
+    font-size: 2rem;
+    /* background-color: rgba(197, 197, 197, 0.75); */
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    outline: none;
+    background-color: transparent;
+    color: white;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.operator-btn, .equals-btn {
+   /* background-color: rgb(255, 140, 0); */
+}
+
+.ac-btn, #zero-btn {
     grid-column: span 2;
+}
+
+.ac-btn, .del-btn {
+  /*  background-color: rgba(128, 128, 128, 0.75); */
+}
+
+#footer {
+    position: fixed;
+    letter-spacing: 1px;
+    bottom: 20px;
+    width: 100%;
+    color: rgb(255, 255, 255, 0.75);
+    text-align: center;
+    font-size: 16px;
+    animation: pulsate2 0.11s ease-in-out infinite alternate; 
 }
