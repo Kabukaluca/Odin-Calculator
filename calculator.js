@@ -29,6 +29,10 @@ delBtn.addEventListener("click", () => {
 acBtn.addEventListener("click", () => {
     currentDisplay.textContent = "";
     previousDisplay.textContent = "";
+    firstNum = "";
+    secondNum = "";
+    operator = "";
+    result = "";
     hasOperatorBtn = false;
 });
 
